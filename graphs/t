@@ -1,0 +1,102 @@
+function findFFT(A, n):
+
+    # Base Case n = 3^0
+    if n == 1:                     
+        return [A[0]]
+
+    k = n / 3                      
+    w_n = exp(2πi / n)            
+    w_3_1 = exp(2πi / 3)              
+    
+    # Splitting the array in 3 parts 
+    A0 = [A[3*j]   for j = 0 .. k-1]
+    A1 = [A[3*j+1] for j = 0 .. k-1]
+    A2 = [A[3*j+2] for j = 0 .. k-1]
+
+    # Recursive call to subarrays
+    C = findFFT(A0, k)
+    D = findFFT(A1, k)
+    E = findFFT(A2, k)
+
+    # Merging
+    for i = 0 .. k-1:
+        W_i = (w_n)^i
+
+        FFT[i]      = C[i] + W_i * D[i] + (W_i^2) * E[i]
+        FFT[i + k]  = C[i] + W_i * w_3_1 * D[i] + w_3_1^2 * (W_i^2) * E[i]
+        FFT[i+2*k]  = C[i] + W_i * w_3_1^2 * D[i] + w_3_1 * (W_i^2) * E[i]
+
+    return FFT
+
+
+
+
+
+
+
+
+    function solo_chomp(V', LF):
+        let dp[0..LF] = array of size (LF+1)
+        dp[0] = V'[0] // which will be 0, since we are not cutting any log
+        
+        for i from 1 to LF:
+            best = 0
+            for j from 1 to i:
+                best = max(best, V'[j] + dp[i - j])
+            dp[x] = best
+        
+        return dp[LF]
+
+
+    
+        function chomping_logs(V, LF, LM):
+            let dp[0..LF][0..LM] = array of size (LF+1) * (LM+1)
+                dp[0][0] = V[0][0] // which will be 0, since we are not cutting any log
+            
+            for i from 0 to LF:
+                for j from 0 to LM:
+                    if (i == 0 and j == 0):
+                        continue;
+                    else:
+                        best = 0
+                        for k from 0 to i:
+                            for l from 0 to j:
+                                best = max(best, V[k][l] + dp[i - k][j - l])
+                        dp[i][j] = best
+            
+            return dp[LF][LM]
+        
+
+            function minInsertionsToPalindrome(s):
+                n = length(s)
+                dp = 2D array of size n x n, filled with 0
+            
+                # substrings of length 1 need 0 insertions
+                for i = 0 to n-1:
+                    dp[i][i] = 0
+            
+                # fill substrings of increasing length
+                for length = 2 to n:
+                    for i = 0 to n - length:
+                        j = i + length - 1
+            
+                        if s[i] == s[j]:
+                            dp[i][j] = dp[i+1][j-1] 
+                        else:
+                            dp[i][j] = 1 + min(dp[i+1][j], dp[i][j-1])
+            
+                return dp[0][n-1]
+
+                
+
+
+
+
+
+
+
+
+
+
+
+
