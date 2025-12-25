@@ -18,22 +18,7 @@ public class L206 {
         head.next.next.next.next = new ListNode(5);
         ListNode result = reverseList(head);
         System.out.println("Reversed list: ");
-        printList(result);
-    }
-
-    public static void printList(ListNode head) {
-        while(head != null){
-            System.out.print(head.val + " ");
-            head = head.next;
-        }
-        System.out.println();
+        ListNode.printList(result);
     }
 }
 
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int val) {
-        this.val = val;
-    }
-}
